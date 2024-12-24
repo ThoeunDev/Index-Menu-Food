@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Slider</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Times New Roman, sans-serif;
+            background-color: #3D52A0;
+        }
+
+        /* Updated header styles */
+        .header {
+            background: linear-gradient(45deg, #3D52A0, #5F75C3); /* Gradient background */
+            padding: 20px 20px; /* Reduced padding */
+            text-align: center;
+            color: white;
+            font-size: 35px; /* Further reduced font size */
+            font-weight: bold;
+            text-transform: uppercase; /* Capitalize all letters */
+            letter-spacing: 2px; /* Reduced letter spacing */
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+            animation: slideIn 1s ease-out; /* Animation for smooth entrance */
+        }
+
+        /* Animation for smooth entrance */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header .subtext {
+            font-size: 16px; /* Further reduced subtext font size */
+            font-weight: normal;
+            margin-top: 10px;
+            font-family: 'Roboto', sans-serif;
+            opacity: 0.8;
+        }
+
+        .featured-product {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+            background-color: #8498c5;
+        }
+
+        .image-slider {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .image-slider img {
+            width: 100%;
+            height: auto;
+            display: none;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .image-slider img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .slider-controls button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .slider-controls button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .product-slider {
+            background-color: #7091E6;
+            padding: 20px 10px;
+        }
+
+        .product-slider h3 {
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .slider-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding: 10px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .slider-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .slider-container::-webkit-scrollbar-thumb {
+            background-color: #505c7e;
+            border-radius: 4px;
+        }
+
+        .slider-item {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 470px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 10px;
+            scroll-snap-align: start;
+        }
+
+        .slider-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .slider-item p {
+            margin: 10px 0 0;
+            font-size: 18px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 80%;
+        }
+
+        .modal img {
+            width: 100%;
+            height: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: rgb(255, 255, 255);
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #ff6600;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Happy Merry Christmas</h1>
+    <p class="subtext">Exclusive Offers Just for You!</p>
+</div>
+
+<div class="featured-product">
+    <div class="image-slider">
+        <img src="./Images/11.jpg" alt="Featured Image 1" class="active">
+        <img src="./Images/12.jpg" alt="Featured Image 2">
+    </div>
+    <h2>Special Promotions</h2>
+</div>
+
+<div class="product-slider">
+    <h3>Category</h3>
+    <div class="slider-container">
+        <div class="slider-item">
+            <img src="./Images/1.jpg" alt="New Product" onclick="openModal('./Images/1.jpg')">
+            <p>Menu Type</p>
+        </div>
+        <div class="slider-item">
+            <img src="./Images/2.jpg" alt="Product 2" onclick="openModal('./Images/2.jpg')">
+            <p>Food Menu</p>
+        </div>
+        <div class="slider-item">
+            <img src="./Images/3.jpg" alt="Product 3" onclick="openModal('./Images/3.jpg')">
+            <p>ប្រភេទញាំ</p>
+        </div>
+        <div class="slider-item">
+            <img src="./Images/4.jpg" alt="Product 4" onclick="openModal('./Images/4.jpg')">
+            <p>Food Menu</p>
+        </div>
+        <div class="slider-item">
+            <img src="./Images/5.jpg" alt="Product 5" onclick="openModal('./Images/5.jpg')">
+            <p>Food Menu</p>
+        </div>
+        <div class="slider-item">
+            <img src="./Images/6.jpg" alt="Product 6" onclick="openModal('./Images/6.jpg')">
+            <p>Food Menu</p>
+        </div>
+        <div class="slider-item">
+            <img src="./Images/7.jpg" alt="Product 7" onclick="openModal('./Images/7.jpg')">
+            <p>Food Menu</p>
+        </div>
+        <div class="slider-item">
+            <img src="./Images/8.jpg" alt="Product 8" onclick="openModal('./Images/8.jpg')">
+            <p>SOFT DRINK</p>
+        </div>
+        <div class="slider-item">
+            <img src="./Images/9.jpg" alt="Product 9" onclick="openModal('./Images/9.jpg')">
+            <p>SOFT DRINK</p>
+        </div>
+        <div class="slider-item">
+            <img src="./Images/10.jpg" alt="Product 10" onclick="openModal('./Images/10.jpg')">
+            <p>Special Offer</p>
+        </div>
+    </div>
+</div>
+
+<!-- Modal to display image -->
+<div id="imageModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <img id="modalImage" src="" alt="Image Preview">
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.image-slider img');
+
+    function showSlide(index) {
+        if (index >= slides.length) currentSlide = 0;
+        if (index < 0) currentSlide = slides.length - 1;
+
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === currentSlide) {
+                slide.classList.add('active');
+            }
+        });
+    }
+
+    function autoSlide() {
+        currentSlide++;
+        showSlide(currentSlide);
+    }
+
+    // Initialize slider
+    showSlide(currentSlide);
+
+    // Set interval for automatic sliding every 3 seconds
+    setInterval(autoSlide, 3000);
+
+    // Modal functionality
+    function openModal(imageSrc) {
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        modal.style.display = "flex";
+        modalImage.src = imageSrc;
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = "none";
+    }
+</script>
+
+</body>
+</html>
